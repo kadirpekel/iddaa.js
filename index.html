@@ -1,0 +1,43 @@
+<html>
+<head>
+<script type="text/javascript" src="iddaa.js"></script>
+<script  type="text/javascript">
+function eval() {
+var d = JSON.parse(document.getElementById('txt').value);
+var res;
+var color;
+try {
+	res = new Coupon(d.items).eval(d.mult, d.systems);
+	color='green';
+} catch (e) {
+	res = e ? e.description : "Unknown error";
+	color='red';
+}
+document.getElementById('dsp').innerHTML = dump(res);
+document.getElementById('dsp').style.backgroundColor = color;
+}
+</script>
+</head>
+<body>
+<div style="width:450px;height:450px;float:left;">
+<textarea id="txt" style="width:100%;height:100%">
+{
+"items": [
+	{"mbs": 2, "oddValue":1.3},
+	{"mbs": 2, "oddValue":8.25, "isBank":true},
+	{"mbs": 2, "oddValue":3.35, "isBank":true}
+	],
+"mult": 5,
+"systems": []
+}
+</textarea>
+</div>
+<div style="width:450px;height:450px;float:left;">
+<pre id="dsp" style="margin:0px;width:100%;height:100%;color:white;font-weight:bold;"></pre>
+</div>
+<div style="clear:both;">
+<input id="btn" type="button" value="calculate"
+	onclick="javascript:eval()">
+</div>
+</body>
+</html>
